@@ -1,0 +1,50 @@
+#!/bin/sh
+
+__ports_usage() {
+  cat <<EOF
+NAME:
+  ports - a tool to easily see what's happening on your computer's ports
+USAGE:
+  ports [global options] command [command options] [arguments...]
+COMMANDS:
+  ls                list all open ports and the processes running in them
+  show <port>       show what process is running on a given port
+  kill <port>       kill whatever process is running in the given port (kill -9)
+GLOBAL OPTIONS:
+  --help,-h         show help
+EOF
+}
+
+ports() {
+  test $# -eq 0 && {
+    __ports_usage
+    exit 0
+  }
+  while test $# -gt 0; do
+    case "$1" in
+      ls)
+        lsof -i -n -P
+        return 0
+        ;;
+      show)
+        lsof -i :"$2" | tail -n 1
+        return 0
+        ;;
+      kill)
+        ports show "$2" | awk '{ print $2; }' | xargs kill -9
+        return 0
+        ;;
+      --help|-h)
+        __ports_usage
+        return 0
+        ;;
+      *)
+        __ports_usage
+        return 1
+        ;;
+      esac
+    done
+}
+
+test "$0" != "$BASH_SOURCE" || echo $ZSH_EVAL_CONTEXT | egrep ":file$" ||
+  ports $*

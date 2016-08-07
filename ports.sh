@@ -32,9 +32,11 @@ ports() {
       --help)
         __ports_usage
         return 0
+        ;;
       *)
         __ports_usage
         return 1
+        ;;
       esac
     done
 }

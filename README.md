@@ -9,8 +9,6 @@ Usage:
 ```console
 $ ports ls
 COMMAND     PID   USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
-ports ls
-COMMAND     PID   USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
 UserEvent   254 carlos    4u  IPv4 0x1835878847405b73      0t0  UDP *:*
 sharingd    365 carlos   18u  IPv4 0x18358788474051d3      0t0  UDP *:*
 sharingd    365 carlos   22u  IPv4 0x1835878847408b93      0t0  UDP *:*
